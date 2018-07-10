@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import TaskList from './components/TaskList';
+import TaskInput from './components/TaskInput';
 export default class App extends Component {
   constructor (props) {
     super(props);
@@ -43,16 +44,12 @@ export default class App extends Component {
   render () {
     return (
       <div className="todoListMain">
-        <div className="header">
-          <input placeholder="enter task" value={ this.state.text } onChange={ this.handleOnChange } />
-          <button onClick={ this.addItem } >add</button>
-          <ul className="theList">
-            {
-              this.state.tasks.map( task => 
-              <li onClick={ this.deleteItem(task.key) } key={ task.key } > {task.text} </li>)
-              }
-          </ul>
-        </div>
+        <TaskInput
+          text={ this.state.text}
+          onChange={ this.handleOnChange }
+          onAddItem={ this.addItem }
+        />
+        <TaskList onItemClick={ this.deleteItem } tasks={ this.state.tasks } />
       </div>
     );
   }
